@@ -37,3 +37,12 @@ API de restaurantes
 
     nodemon dist/main.js
 
+A14-Primeiro exemplo com restify
+
+> Primeiros passos
+> Criar o server, configurar as rotas, ouvir porta
+
+A15- Os objetos Requeste, response, Next
+
+    http://localhost:3000/info?name=teste&age=30
+
