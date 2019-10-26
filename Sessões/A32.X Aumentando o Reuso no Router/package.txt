@@ -1,0 +1,29 @@
+{
+  "name": "meat-api",
+  "version": "1.0.0",
+  "description": "API de restaurantes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ederpbj/meat-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ederpbj/meat-api/issues"
+  },
+  "homepage": "https://github.com/ederpbj/meat-api#readme",
+  "dependencies": {
+    "@types/restify-errors": "^4.3.3",
+    "mongoose": "4.13.9",
+    "restify": "6.3.4"
+  },
+  "devDependencies": {
+    "@types/mongoose": "4.7.32",
+    "@types/restify": "5.0.6"
+  }
+}

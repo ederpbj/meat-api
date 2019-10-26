@@ -1,0 +1,12 @@
+{
+    "exclude": [
+        "Sessões",
+    ],
+    "compilerOptions":{
+        "outDir": "src/dist",
+        "target": "es2015",
+        "module": "commonjs",
+        //"sourceMap":true
+    },
+   
+}
