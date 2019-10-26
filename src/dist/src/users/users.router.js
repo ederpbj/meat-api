@@ -28,12 +28,13 @@ class UsersRouter extends router_1.Router {
                 return next();
             });
         });
+        //Substitui todo documento do id referente
         application.put('/users/:id', (req, resp, next) => {
             const options = { overwrite: true };
             users_model_1.User.update({ _id: req.params.id }, req.body, options)
                 .exec().then(result => {
                 if (result.n) {
-                    console.log("P1: Deu certo xxxxxxxxxxxxxxxxxxx");
+                    //console.log("P1: Deu certo xxxxxxxxxxxxxxxxxxx")
                     return users_model_1.User.findById(req.params.id);
                 }
                 else {
@@ -42,6 +43,22 @@ class UsersRouter extends router_1.Router {
             }).then(user => {
                 resp.json(user);
                 return next();
+            });
+        });
+        //Atualizar parte do documento
+        application.patch('/users/:id', (req, resp, next) => {
+            const options = { new: true };
+            //procura e atualiza
+            users_model_1.User.findByIdAndUpdate({ _id: req.params.id }, req.body, options)
+                .then(user => {
+                if (user) {
+                    //console.log("P1: Deu certo xxxxxxxxxxxxxxxxxxx")
+                    resp.json(user);
+                }
+                else {
+                    resp.send(404);
+                    return next();
+                }
             });
         });
     }
