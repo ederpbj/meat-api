@@ -1,5 +1,5 @@
 import {Router} from '../common/router'
-import * from 'restify'
+import * as restify from 'restify'
 import {User} from './users.model'
 
 
