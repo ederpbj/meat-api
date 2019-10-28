@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: false,
-        enum: ['Male', 'Female']
-    }
+        enum: ['Male', 'Female'],
+    },
 });
 exports.User = mongoose.model('User', userSchema);

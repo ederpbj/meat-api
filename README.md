@@ -46,3 +46,9 @@ A15- Os objetos Requeste, response, Next
 
     http://localhost:3000/info?name=teste&age=30
 
+
+>Correção de erro
+
+    rm -rf node_modules
+    npm install -g npm@latest
+    npm i core-util-is
