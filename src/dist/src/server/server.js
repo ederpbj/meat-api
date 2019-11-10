@@ -12,22 +12,6 @@ class Server {
             useMongoClient: true
         });
     }
-    /* initializeDb() {
-      //const connectDB = async () => {
-        try {
-            mongoose.connect(environment.db.url, {
-                useNewUrlParser: true,
-                useCreateIndex: true,
-                useUnifiedTopology: true,
-                useFindAndModify: false
-            });
-            console.log("MongoDB Conected")
-        } catch (err) {
-            console.error(err.message);
-            process.exit(1);
-        }
-    //};
-    } */
     initRoutes(routers) {
         return new Promise((resolve, reject) => {
             try {
