@@ -56,3 +56,9 @@ A15- Os objetos Requeste, response, Next
 > Erro no mongo community local
 
     Criar pasta 'C:\Data\db'
+
+> Ferramenta para encriptar senha
+
+    npm i bcrypt@1.0.3 -P -E
+
+    npm i @types/bcrypt@1.0.0 -D -E

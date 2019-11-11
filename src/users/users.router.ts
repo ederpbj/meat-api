@@ -28,6 +28,7 @@ class UsersRouter extends Router {
 
     application.post('/users', (req, resp, next)=>{
       let user = new User(req.body)
+      //Aciona a middleware em users.model
       user.save()
         .then(this.render(resp, next))
         .catch(next)
