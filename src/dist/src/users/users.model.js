@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
+const validators_1 = require("../common/validators");
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -24,5 +25,13 @@ const userSchema = new mongoose.Schema({
         required: false,
         enum: ['Male', 'Female'],
     },
+    cpf: {
+        type: String,
+        required: false,
+        validate: {
+            validator: validators_1.validateCPF,
+            message: '{PATH}: Invalid CPF ({VALUE})'
+        }
+    }
 });
 exports.User = mongoose.model('User', userSchema);

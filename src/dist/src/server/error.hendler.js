@@ -16,6 +16,7 @@ exports.handleError = (req, resp, err, done) => {
             break;
         case 'ValidationError':
             err.statusCode = 400;
+            //Exibe erros na tela em forma de array
             const messages = [];
             for (let name in err.errors) {
                 messages.push({ message: err.errors[name].message });

@@ -36,14 +36,14 @@ const userSchema = new mongoose.Schema({
     enum: ['Male', 'Female'],
    
   },
-  /* cpf: {
+  cpf: {
     type: String,
     required: false,
     validate: {
       validator: validateCPF,
       message: '{PATH}: Invalid CPF ({VALUE})'
     }
-  } */
+  }
 })
 
  export const User = mongoose.model<User>('User', userSchema)

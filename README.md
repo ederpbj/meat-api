@@ -52,3 +52,7 @@ A15- Os objetos Requeste, response, Next
     rm -rf node_modules
     npm install -g npm@latest
     npm i core-util-is
+
+> Erro no mongo community local
+
+    Criar pasta 'C:\Data\db'
