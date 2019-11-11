@@ -36,19 +36,41 @@ const userSchema = new mongoose.Schema({
         }
     }
 });
-//Middleware
-//Para criptografar password
-userSchema.pre('save', function (next) {
+//Função hash
+const hashPassword = (obj, next) => {
+    bcrypt.hash(obj.password, environment_1.environment.security.saltRounds)
+        .then(hash => {
+        obj.password = hash;
+        next();
+    }).catch(next);
+};
+//Função middleware
+const saveMiddleware = function (next) {
+    //this representa um documento
     const user = this;
     if (!user.isModified('password')) {
         next();
     }
     else {
-        bcrypt.hash(user.password, environment_1.environment.security.saltRounds)
-            .then(hash => {
-            user.password = hash;
-            next();
-        }).catch(next);
+        hashPassword(user, next);
     }
-});
+};
+const updateMiddleware = function (next) {
+    //this.getUpdate(): retorna um objeto com as modificações
+    //Verifica se tem um password
+    if (!this.getUpdate().password) {
+        next();
+        //Se tiver password entra no else
+    }
+    else {
+        hashPassword(this.getUpdate(), next);
+    }
+};
+//Middleware
+//Para criptografar password 
+//Create
+userSchema.pre('save', saveMiddleware);
+//Update
+userSchema.pre('findOneAndUpdate', updateMiddleware);
+userSchema.pre('update', updateMiddleware);
 exports.User = mongoose.model('User', userSchema);

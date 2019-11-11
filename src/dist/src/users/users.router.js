@@ -31,7 +31,7 @@ class UsersRouter extends router_1.Router {
         });
         //Substitui todo documento do id referente
         application.put('/users/:id', (req, resp, next) => {
-            const options = { overwrite: true };
+            const options = { runValidators: true, overwrite: true };
             users_model_1.User.update({ _id: req.params.id }, req.body, options)
                 .exec().then(result => {
                 if (result.n) {
@@ -48,7 +48,7 @@ class UsersRouter extends router_1.Router {
         //Atualizar parte do documento
         //Inserir (application/merge-patch+json) quando for testar
         application.patch('/users/:id', (req, resp, next) => {
-            const options = { new: true };
+            const options = { runValidators: true, new: true };
             //procura e atualiza
             users_model_1.User.findByIdAndUpdate({ _id: req.params.id }, req.body, options)
                 .then(this.render(resp, next))

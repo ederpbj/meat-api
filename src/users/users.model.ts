@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
-import {validateCPF} from '../common/validators'
+import { validateCPF } from '../common/validators'
 import * as bcrypt from 'bcrypt'
-import {environment} from '../common/environment'
+import { environment } from '../common/environment'
 
 export interface User extends mongoose.Document {
   name: string,
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
     enum: ['Male', 'Female'],
-   
+
   },
   cpf: {
     type: String,
@@ -48,19 +48,45 @@ const userSchema = new mongoose.Schema({
   }
 })
 
-//Middleware
-//Para criptografar password
-userSchema.pre('save', function (next) {
-  const user: User = this
-  if(!user.isModified('password')){
-    next();
-  }else{
-    bcrypt.hash(user.password, environment.security.saltRounds)
-      .then(hash => {
-        user.password = hash
-        next()
-      }).catch(next)
-  }
-})
+//Função hash
+const hashPassword = (obj, next) => {
+  bcrypt.hash(obj.password, environment.security.saltRounds)
+    .then(hash => {
+      obj.password = hash
+      next()
+    }).catch(next)
+}
 
- export const User = mongoose.model<User>('User', userSchema)
+//Função middleware
+const saveMiddleware = function (next) {
+  //this representa um documento
+  const user: User = this
+  if (!user.isModified('password')) {
+    next();
+  } else {
+    hashPassword(user, next)
+  }
+}
+
+const updateMiddleware = function (next) {
+  //this.getUpdate(): retorna um objeto com as modificações
+  //Verifica se tem um password
+  if (!this.getUpdate().password) {
+    next();
+
+    //Se tiver password entra no else
+  } else {
+    hashPassword(this.getUpdate(), next)
+  }
+}
+
+  //Middleware
+  //Para criptografar password 
+
+  //Create
+  userSchema.pre('save', saveMiddleware)
+  //Update
+  userSchema.pre('findOneAndUpdate', updateMiddleware)
+  userSchema.pre('update', updateMiddleware)
+
+  export const User = mongoose.model<User>('User', userSchema)
