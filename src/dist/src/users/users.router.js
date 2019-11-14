@@ -8,7 +8,17 @@ class UsersRouter extends model_router_1.ModelRouter {
         super(users_model_1.User);
         this.findByEmail = (req, resp, next) => {
             if (req.query.email) {
-                users_model_1.User.find({ email: req.query.email })
+                //User.find({email: req.query.email})
+                users_model_1.User.findByEmail(req.query.email)
+                    //Retorna um array
+                    .then(user => {
+                    if (user) {
+                        return [user];
+                    }
+                    else {
+                        return [];
+                    }
+                })
                     .then(this.renderAll(resp, next))
                     .catch(next);
             }
