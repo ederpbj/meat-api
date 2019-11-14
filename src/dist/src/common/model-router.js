@@ -25,11 +25,13 @@ class ModelRouter extends router_1.Router {
         };
         //Get
         this.findById = (req, resp, next) => {
-            this.model.findById(req.params.id)
+            //Método 2
+            this.prepareOne(this.model.findById(req.params.id))
                 .then(this.render(resp, next))
                 .catch(next);
         };
         //Post
+        //(=>) usado para capturar o this
         this.save = (req, resp, next) => {
             let document = new this.model(req.body);
             //Aciona a middleware em users.model
@@ -75,6 +77,10 @@ class ModelRouter extends router_1.Router {
                 return next();
             }).catch(next);
         };
+    }
+    //Método 2
+    prepareOne(query) {
+        return query;
     }
 }
 exports.ModelRouter = ModelRouter;

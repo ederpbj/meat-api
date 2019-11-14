@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    coments: {
+    comments: {
         type: String,
         required: true,
         maxlength: 500
@@ -30,4 +30,4 @@ const reviewSchema = new mongoose.Schema({
         required: true
     }
 });
-const Review = mongoose.model('Review', reviewSchema);
+exports.Review = mongoose.model('Review', reviewSchema);
