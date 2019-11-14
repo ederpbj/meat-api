@@ -13,11 +13,25 @@ class UsersRouter extends ModelRouter<User> {
     })
   }
 
+  findByEmail = (req, resp, next) => {
+    if(req.query.email){
+      User.find({email: req.query.email})
+          .then(this.renderAll(resp, next))
+          .catch(next)
+    }else{
+      //se não for de responssábilidade dessa calback, passa adiante
+      next()
+    }
+  }
+
   applyRoutes(application: restify.Server){
 
     //callbacks 
-    //findAll
-    application.get('/users', this.findAll)
+    //findAll, só funciona para essa versão especificada,
+    //Se não especificar funciona em todas as versões, 
+    //A execusão de versão obedece a ordem de criação, primeiro as mais novas (2.0.0)
+    application.get({path:'/users', version: '2.0.0'}, [this.findByEmail, this.findAll])
+    application.get({path:'/users', version: '1.0.0'}, this.findAll)
     //get por id
     application.get('/users/:id', [this.validadeId ,this.findById])
     //Alterar usuário

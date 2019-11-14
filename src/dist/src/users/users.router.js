@@ -6,6 +6,17 @@ const users_model_1 = require("./users.model");
 class UsersRouter extends model_router_1.ModelRouter {
     constructor() {
         super(users_model_1.User);
+        this.findByEmail = (req, resp, next) => {
+            if (req.query.email) {
+                users_model_1.User.find({ email: req.query.email })
+                    .then(this.renderAll(resp, next))
+                    .catch(next);
+            }
+            else {
+                //se não for de responssábilidade dessa calback, passa adiante
+                next();
+            }
+        };
         this.on('beforeRender', document => {
             document.password = undefined;
             //delete document.password
@@ -13,8 +24,11 @@ class UsersRouter extends model_router_1.ModelRouter {
     }
     applyRoutes(application) {
         //callbacks 
-        //findAll
-        application.get('/users', this.findAll);
+        //findAll, só funciona para essa versão especificada,
+        //Se não especificar funciona em todas as versões, 
+        //A execusão de versão obedece a ordem de criação, primeiro as mais novas (2.0.0)
+        application.get({ path: '/users', version: '2.0.0' }, [this.findByEmail, this.findAll]);
+        application.get({ path: '/users', version: '1.0.0' }, this.findAll);
         //get por id
         application.get('/users/:id', [this.validadeId, this.findById]);
         //Alterar usuário
