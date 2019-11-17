@@ -7,6 +7,10 @@ class Router extends events_1.EventEmitter {
     envelope(document) {
         return document;
     }
+    //A47 Paginação - Skip e Limit
+    envelopeAll(documents, options = {}) {
+        return documents;
+    }
     render(response, next) {
         return (document) => {
             if (document) {
@@ -21,7 +25,7 @@ class Router extends events_1.EventEmitter {
             return next();
         };
     }
-    renderAll(response, next) {
+    renderAll(response, next, options = {}) {
         return (documents) => {
             if (documents) {
                 //documents.forEach(document=>{
@@ -29,10 +33,12 @@ class Router extends events_1.EventEmitter {
                     this.emit('beforeRender', document);
                     array[index] = this.envelope(document);
                 });
-                response.json(documents);
+                //response.json(documents)
+                response.json(this.envelopeAll(documents, options));
             }
             else {
-                response.json([]);
+                //response.json([])
+                response.json(this.envelopeAll([]));
             }
             return next();
         };
