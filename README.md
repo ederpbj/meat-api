@@ -77,20 +77,21 @@ A15- Os objetos Requeste, response, Next
 
 >Configuração do jest segundo A48
 
-        "jest":{
-        "transform":{
-            "^.+\\tsx?$": "ts-jest"
-        },
-        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec)\\.(jsx?|tsx?)$",
-        "moduleFileExtensions":[
-            "ts",
-            "tsx",
-            "js",
-            "jsx",
-            "json",
-            "node"
-        ]
-    }
+        "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
 
 >Para rodar o teste
 
