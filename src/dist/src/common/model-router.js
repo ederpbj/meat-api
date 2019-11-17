@@ -44,14 +44,12 @@ class ModelRouter extends router_1.Router {
             this.model.update({ _id: req.params.id }, req.body, options)
                 .exec().then(result => {
                 if (result.n) {
-                    return this.model.findById(req.params.id);
+                    return this.prepareOne(this.model.findById(req.params.id));
                 }
                 else {
-                    //resp.send(404)
                     throw new restify_errors_1.NotFoundError('Documento não encontrado');
                 }
-            })
-                .then(this.render(resp, next))
+            }).then(this.render(resp, next))
                 .catch(next);
         };
         this.update = (req, resp, next) => {
