@@ -62,3 +62,36 @@ A15- Os objetos Requeste, response, Next
     npm i bcrypt@1.0.3 -P -E
 
     npm i @types/bcrypt@1.0.0 -D -E
+
+> Seção 9: Testando a API com Jest e Supertest
+> A48. Instalando as Dependências
+
+
+    npm i jest@22.4.2 ts-jest@22.0.4 typescript@2.6.2 supertest@3.0.0 @types/jest@22.1.2 @types/supertest@2.0.4 -D -E
+
+>Acessar o git
+
+[Github](https://github.com/kulshekhar/ts-jest)
+
+[Config](https://kulshekhar.github.io/ts-jest/user/config/)
+
+>Configuração do jest segundo A48
+
+        "jest":{
+        "transform":{
+            "^.+\\tsx?$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec)\\.(jsx?|tsx?)$",
+        "moduleFileExtensions":[
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ]
+    }
+
+>Para rodar o teste
+
+    npm test

@@ -1,12 +1,12 @@
 {
     "exclude": [
         "Sessões",
+        "**/*.test.ts"
     ],
     "compilerOptions":{
         "outDir": "src/dist",
         "target": "es2015",
         "module": "commonjs",
         //"sourceMap":true
-    },
-   
+    }
 }
