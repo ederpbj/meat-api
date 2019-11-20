@@ -1,5 +1,0 @@
-Fim da seção
-Seção 6: Validação, Eventos e Tratamento de Erros - Restify & Mongoose
-
-Início da seção
-Seção 7: Extendendo a API para Outros Recursos
