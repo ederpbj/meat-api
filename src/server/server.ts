@@ -57,13 +57,13 @@ export class Server {
   }
 
   bootstrap(routers: Router[] = []): Promise<Server> {
-    console.log('0 - bootstrap')
+    //console.log('0 - bootstrap')
     return this.initializeDb().then(() =>
       this.initRoutes(routers).then(() => this))
   }
 
   shutdown() {
-    console.log("2-Shutdown")
+    //console.log("2-Shutdown")
     return mongoose.disconnect().then(() => this.application.close())
   }
 

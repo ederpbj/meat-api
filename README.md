@@ -100,3 +100,7 @@ A15- Os objetos Requeste, response, Next
 >Para rodar o teste
 
     npm test
+
+> A51 Inicialização Global para todas as Suites
+
+    npm i ts-node@5.0.1 jest-cli@22.4.2 -D -E

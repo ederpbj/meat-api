@@ -1,22 +1,23 @@
 import 'jest'
 import * as request from 'supertest'
 
+
 let address: string = (<any>global).address
 
 //test.only //Executa somente esse teste
 //test.skip //Pula a execussão do teste
-test('get /users', ()=> {
+test('get /reviews', ()=> {
     return request(address)
-        .get('/users')
+        .get('/reviews')
         .then(response=>{
             expect(response.status).toBe(200)
             expect(response.body.items).toBeInstanceOf(Array)
         }).catch(fail)
 })
 
-test('post /users', ()=> {
+test.skip('post /reviews', ()=> {
     return request(address)
-        .post('/users')
+        .post('/reviews')
         .send({
             name: 'usuario1',
             email: 'usuario@email.com',
@@ -34,24 +35,24 @@ test('post /users', ()=> {
         
 })
 
-test('get /users/aaaa - not found', ()=>{
+test('get /reviews/aaaa - not found', ()=>{
     return request(address)
-        .get('/users/aaaa')
+        .get('/reviews/aaaa')
         .then(response=>{
             expect(response.status).toBe(404)
         }).catch(fail)
 })
 
-test('path /users:id', ()=>{
+test.skip('path /reviews:id', ()=>{
     return request(address)
-        .post('/users')
+        .post('/reviews')
         .send({
             name: 'usuario2',
             email: 'usuario2@email.com',
             password: '123456'
         })
         .then(response=>request(address)
-                        .patch(`/users/${response.body._id}`)
+                        .patch(`/reviews/${response.body._id}`)
                         .send({
                             name: 'usuario2 - patch'
                         }))
