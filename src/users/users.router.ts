@@ -25,7 +25,11 @@ class UsersRouter extends ModelRouter<User> {
               return []
             }
           })
-          .then(this.renderAll(resp, next))
+          //Para gerar hipelinks
+          .then(this.renderAll(resp, next, {
+            pageSize: this.pageSize,
+            url: req.url
+          }))
           .catch(next)
     }else{
       //se não for de responssábilidade dessa calback, passa adiante

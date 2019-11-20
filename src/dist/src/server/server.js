@@ -41,7 +41,12 @@ class Server {
         });
     }
     bootstrap(routers = []) {
+        //console.log('0 - bootstrap')
         return this.initializeDb().then(() => this.initRoutes(routers).then(() => this));
+    }
+    shutdown() {
+        //console.log("2-Shutdown")
+        return mongoose.disconnect().then(() => this.application.close());
     }
 }
 exports.Server = Server;

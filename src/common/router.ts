@@ -25,7 +25,7 @@ export abstract class Router extends EventEmitter {
         throw new NotFoundError('Documento não encontrado')
       }
        //Indica ao restifi que a callback terminou de trabalhar
-      return next()
+      return next(false)
     }
   }
 
@@ -43,7 +43,7 @@ export abstract class Router extends EventEmitter {
         //response.json([])
         response.json(this.envelopeAll([]))
       }
-      return next()
+      return next(false)
     }
   }
 }

@@ -22,7 +22,7 @@ class Router extends events_1.EventEmitter {
                 throw new restify_errors_1.NotFoundError('Documento não encontrado');
             }
             //Indica ao restifi que a callback terminou de trabalhar
-            return next();
+            return next(false);
         };
     }
     renderAll(response, next, options = {}) {
@@ -40,7 +40,7 @@ class Router extends events_1.EventEmitter {
                 //response.json([])
                 response.json(this.envelopeAll([]));
             }
-            return next();
+            return next(false);
         };
     }
 }

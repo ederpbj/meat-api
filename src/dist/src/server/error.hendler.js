@@ -23,6 +23,7 @@ exports.handleError = (req, resp, err, done) => {
                 //console.log(err.errors[name])
             }
             err.toJSON = () => ({
+                message: 'Validation error while processing you request',
                 errors: messages,
             });
             break;
