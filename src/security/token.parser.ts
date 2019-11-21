@@ -4,14 +4,14 @@ import * as jwt from 'jsonwebtoken'
 import {User} from '../users/users.model'
 import {environment} from '../common/environment'
 
-export const tokenParser: restify.RequestHandler = (req, resp, next) = {
+export const tokenParser: restify.RequestHandler = (req, resp, next) => {
     const token = extractToken(req)
     if(token){
-        jwt.verify(token, environment.security.apiSecret, applyBearer(req, next))
-    }else{
-        next()
+      jwt.verify(token, environment.security.apiSecret, applyBearer(req, next))
+    } else {
+      next()
     }
-}
+  }
 
 function extractToken(req: restify.Request){
 

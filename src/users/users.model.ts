@@ -9,8 +9,12 @@ export interface User extends mongoose.Document {
   password: string,
   cpf: string,
   gender: string,
-  matches(password: string): boolean 
-  /*
+  matches(password: string): boolean,
+  //hasAny('admin', 'user')
+  hasAny(...profiles: string[]): boolean,
+
+
+  /* Antigo
   (name: string): any;
   (email: string): any;
   (password: string): any;
@@ -54,6 +58,11 @@ const userSchema = new mongoose.Schema({
       validator: validateCPF,
       message: '{PATH}: Invalid CPF ({VALUE})'
     }
+  },
+  profiles: {
+    type: [String],
+    //Não obrigatório
+    required: false
   }
 })
 
@@ -63,9 +72,13 @@ userSchema.statics.findByEmail = function(email: string, projection: string){
 }
 
 //A53 Autenticação
-
 userSchema.methods.matches = function(password: string): boolean {
   return bcrypt.compareSync(password, this.password)
+}
+
+//A56 Autorização
+userSchema.methods.hasAny = function(...profiles: string[]): boolean {
+  return profiles.some(profile => this.profiles.indexOf(profile)!= -1)
 }
 
 //Função hash

@@ -1,0 +1,5 @@
+{
+    "name": "Joe Smit Carter",
+    "email": "smit@servidor.com",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbWl0QHNlcnZpZG9yLmNvbSIsImlzcyI6Im1lYXQtYXBpIiwiaWF0IjoxNTc0Mzc3OTE3fQ.2_yub5munDONWpGUf9SQp4jfSR73A7eaCMQiZrXyphU"
+}

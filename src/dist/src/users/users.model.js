@@ -34,6 +34,11 @@ const userSchema = new mongoose.Schema({
             validator: validators_1.validateCPF,
             message: '{PATH}: Invalid CPF ({VALUE})'
         }
+    },
+    profiles: {
+        type: [String],
+        //Não obrigatório
+        required: false
     }
 });
 //A44
@@ -43,6 +48,10 @@ userSchema.statics.findByEmail = function (email, projection) {
 //A53 Autenticação
 userSchema.methods.matches = function (password) {
     return bcrypt.compareSync(password, this.password);
+};
+//A56 Autorização
+userSchema.methods.hasAny = function (...profiles) {
+    return profiles.some(profile => this.profiles.indexOf(profile) != -1);
 };
 //Função hash
 const hashPassword = (obj, next) => {

@@ -3,11 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
 const users_model_1 = require("../users/users.model");
 const environment_1 = require("../common/environment");
-exports.tokenParser = (req, resp, next) = {
-    const: token = extractToken(req),
-    if(token) {
+exports.tokenParser = (req, resp, next) => {
+    const token = extractToken(req);
+    if (token) {
         jwt.verify(token, environment_1.environment.security.apiSecret, applyBearer(req, next));
-    }, else: {}
+    }
+    else {
+        next();
+    }
 };
 function extractToken(req) {
     let token = undefined;
