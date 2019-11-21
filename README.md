@@ -104,3 +104,16 @@ A15- Os objetos Requeste, response, Next
 > A51 Inicialização Global para todas as Suites
 
     npm i ts-node@5.0.1 jest-cli@22.4.2 -D -E
+
+
+> Token
+
+    npm i jsonwebtoken@8.1.1 -P -E
+
+Definições de tipo
+
+    npm i @types/jsonwebtoken@7.2.5 -D -E
+
+>Ver o que tem no token
+
+[jwt.io](https://jwt.io/)
