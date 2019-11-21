@@ -5,6 +5,7 @@ import { environment } from '../common/environment'
 import { Router } from '../common/router'
 import { mergePatchBodyParser } from './merge-patch.parser'
 import { handleError } from './error.hendler'
+import {tokenParser} from '../security/token.parser'
 
 export class Server {
 
@@ -36,6 +37,8 @@ export class Server {
         this.application.use(restify.plugins.bodyParser())
         //Recomendação para application/merge-patch+json
         this.application.use(mergePatchBodyParser)
+        //Monitora se o request vem com token
+        this.application.use(tokenParser)
 
         //routes
         for (let router of routers) {

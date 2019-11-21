@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const environment_1 = require("../common/environment");
 const merge_patch_parser_1 = require("./merge-patch.parser");
 const error_hendler_1 = require("./error.hendler");
+const token_parser_1 = require("../security/token.parser");
 class Server {
     initializeDb() {
         mongoose.Promise = global.Promise;
@@ -24,6 +25,8 @@ class Server {
                 this.application.use(restify.plugins.bodyParser());
                 //Recomendação para application/merge-patch+json
                 this.application.use(merge_patch_parser_1.mergePatchBodyParser);
+                //Monitora se o request vem com token
+                this.application.use(token_parser_1.tokenParser);
                 //routes
                 for (let router of routers) {
                     router.applyRoutes(this.application);
