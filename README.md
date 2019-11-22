@@ -117,3 +117,7 @@ Definições de tipo
 >Ver o que tem no token
 
 [jwt.io](https://jwt.io/)
+
+> A57 Habilitando HTTPS
+
+Criptografando de ponta a ponta
