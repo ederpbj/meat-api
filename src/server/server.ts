@@ -28,12 +28,17 @@ export class Server {
     return new Promise((resolve, reject) => {
       try {
 
-        this.application = restify.createServer({
+        const options: restify.ServerOptions = {
           name: 'meat-api',
-          version: '1.0.0',
-          certificate: fs.readFileSync('./src/security/keys/cert.pem'),
-          key: fs.readFileSync('./src/security/keys/key.pem')
-        })
+          version: '1.1.0',
+        }
+
+        if(environment.security.enableHTTPS){
+          options.certificate = fs.readFileSync(environment.security.certificate),
+          options.key = fs.readFileSync(environment.security.key)
+        }
+
+        this.application = restify.createServer(options)
 
         //Plugins:
         this.application.use(restify.plugins.queryParser())
