@@ -121,3 +121,73 @@ Definições de tipo
 > A57 Habilitando HTTPS
 
 Criptografando de ponta a ponta
+
+> A58 Instalando e conhecendo PM2
+
+    npm i pm2 -g
+
+>Start
+
+    pm2 start index.js
+
+> No browser
+
+    localhost:4000/?message=hello
+
+> Matar processo
+
+    kill -9 numProcesso
+
+> Listar as aplicações online
+
+    pm2 ls
+
+> Parar aplicação
+
+    pm2 stop index
+
+> Remover da memoria
+
+    pm2 delete index
+
+> Passando parametro
+
+    pm2 start index.js --name=echo
+
+    pm2 stop echo
+
+    pm2 delete echo
+
+> A60.Node Event Loop e Processos em Cluster
+
+Teste de carga usando cluster
+    
+    npm install -g loadtest
+
+
+    loadtest -c 100 -t 15 http://localhost:4000?message=hello
+
+Nova aplicação
+
+//-i (número de instâncias, se for 0 é um por cpu)
+
+    pm2 start index.js -i 0
+
+Seleciona um index
+
+    pm2 scale index 1
+
+> Restartar
+
+Espera o processo terminar
+
+    pm2 reload index
+
+Não espera o processo terminar
+
+    pm2 restart index
+
+Escala 4 processadores 
+
+    pm2 scale index 4
+

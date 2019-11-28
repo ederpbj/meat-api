@@ -92,7 +92,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
       replace = (req, resp, next)=>{
         const options = {runValidators: true, overwrite: true}
         this.model.update({_id: req.params.id}, req.body, options)
-            .exec().then(result => {
+            .exec().then(result=>{
           if(result.n){
             return this.prepareOne(this.model.findById(req.params.id))
           } else{
@@ -105,7 +105,7 @@ export abstract class ModelRouter<D extends mongoose.Document> extends Router {
       update = (req, resp, next)=>{
         const options  = {runValidators: true, new: true}
         //procura e atualiza
-        this.model.findByIdAndUpdate({_id:req.params.id}, req.body, options)
+        this.model.findByIdAndUpdate(req.params.id, req.body, options)
             .then(this.render(resp, next))
             .catch(next)
       }
