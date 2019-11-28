@@ -3,6 +3,8 @@ import * as restify from 'restify'
 import * as mongoose from 'mongoose'
 
 import { environment } from '../common/environment'
+import { logger } from '../common/logger'
+
 import { Router } from '../common/router'
 import { mergePatchBodyParser } from './merge-patch.parser'
 import { handleError } from './error.hendler'
@@ -31,6 +33,7 @@ export class Server {
         const options: restify.ServerOptions = {
           name: 'meat-api',
           version: '1.1.0',
+          log: logger
         }
 
         if(environment.security.enableHTTPS){
@@ -39,6 +42,11 @@ export class Server {
         }
 
         this.application = restify.createServer(options)
+
+        //Prepara o logger
+        this.application.pre(restify.plugins.requestLogger({
+          log: logger
+        }))
 
         //Plugins:
         this.application.use(restify.plugins.queryParser())
@@ -60,7 +68,17 @@ export class Server {
         //Tratamento de erro
         //A33. Tratamento de Erros com Restify
         this.application.on('restifyError', handleError)
+         //(req, resp, route, error)
+        /*this.application.on('after', restify.plugins.auditLogger({
+          log: logger,
+          event: 'after',
+          server: this.application
+        }))
 
+        this.application.on('audit', data=>{
+
+        })*/
+        
       } catch (error) {
         reject(error)
       }

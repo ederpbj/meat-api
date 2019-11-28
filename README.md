@@ -191,3 +191,44 @@ Escala 4 processadores
 
     pm2 scale index 4
 
+> A61. Arquivo de Configuração do PM2
+
+    pm2 ecosystem simple
+
+startar usando ecosystem
+
+    pm2 start ecosystem.config.js
+    pm2 reload ecosystem.config.js
+    pm2 restart ecosystem.config.js
+    pm2 stop ecosystem.config.js
+    pm2 delete ecosystem.config.js
+
+entrando no modo produtction
+
+    pm2 start ecosystem.config.js --env production
+    pm2 scale ecosystem.config.js 1
+
+Força atualização das minhas alterações (--update-env)
+
+    pm2 start ecosystem.config.js --update-env --env production
+
+> A62. Logging com Restify e PM2
+
+    pm2 start ecosystem.config.js
+
+Ver os logs
+
+    pm2 logs
+
+Send mandando autorização
+GET
+
+    http://localhost:5000/users?
+
+No header
+    
+    Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbWl0QHNlcnZpZG9yLmNvbSIsImlzcyI6Im1lYXQtYXBpIiwiaWF0IjoxNTc0OTA3OTQyfQ.8rjSWdIOJiF0B-nvGRGa5PuOwGonWmGGmSUSBf_ZYuU
+
+Pasta de logs
+
+    C:\Users\ederp\.pm2\logs

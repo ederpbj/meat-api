@@ -65,7 +65,7 @@ class ModelRouter extends router_1.Router {
         this.update = (req, resp, next) => {
             const options = { runValidators: true, new: true };
             //procura e atualiza
-            this.model.findByIdAndUpdate({ _id: req.params.id }, req.body, options)
+            this.model.findByIdAndUpdate(req.params.id, req.body, options)
                 .then(this.render(resp, next))
                 .catch(next);
         };
